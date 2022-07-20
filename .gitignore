@@ -1,0 +1,8 @@
+__pycache__/
+
+# Django stuff:
+hhcodingtask.sqlite3
+.idea/
+
+*.DS_Store
+.DS_Store
