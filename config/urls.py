@@ -1,26 +1,28 @@
 from django.conf import settings
-from django.conf.urls import include, url
+from django.urls import include, re_path
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from model_data.views import GenericModelFormView
 
 urlpatterns = [
-    url(r"^$", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    url(
+    re_path(r"^$", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    re_path(
         r"^about/$",
         TemplateView.as_view(template_name="pages/about.html"),
         name="about",
     ),
     # Django Admin, use {% url 'admin:index' %}
-    url(settings.ADMIN_URL, admin.site.urls),
+    re_path(settings.ADMIN_URL, admin.site.urls),
     # User management
-    url(
+    re_path(
         r"^users/",
         include("hhcodingtask.users.urls", namespace="users"),
     ),
-    url(r"^accounts/", include("allauth.urls")),
+    re_path(r"^accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    re_path(r'^model_data/', GenericModelFormView.as_view(), name="model_data"),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
@@ -29,24 +31,24 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
-        url(
+        re_path(
             r"^400/$",
             default_views.bad_request,
             kwargs={"exception": Exception("Bad Request!")},
         ),
-        url(
+        re_path(
             r"^403/$",
             default_views.permission_denied,
             kwargs={"exception": Exception("Permission Denied")},
         ),
-        url(
+        re_path(
             r"^404/$",
             default_views.page_not_found,
             kwargs={"exception": Exception("Page not Found")},
         ),
-        url(r"^500/$", default_views.server_error),
+        re_path(r"^500/$", default_views.server_error),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
 
-        urlpatterns = [url(r"^__debug__/", include(debug_toolbar.urls))] + urlpatterns
+        urlpatterns = [re_path(r"^__debug__/", include(debug_toolbar.urls))] + urlpatterns

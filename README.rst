@@ -81,4 +81,12 @@ Example: python dict that describes fields/types etc.
 
 **A:** Let's assume it should follow standard Python conventions like: be PEP-8 complaint, follow The Zen of Python: https://www.python.org/dev/peps/pep-0020/ In broader sense it should follow well known software principles like SOLID, KISS, DRY etc.
 
+Solution explanation
+====================
+
+1. I had two solutions for how to resolve the task: using JSONfield and using Entity-Attribute-Value (EAV). EAV is a good solution but this is more suitable for the case where we have flexible attributes. In our case, the attributes will be defined using a schema. Therefore, in this case, it would be advisable to use JSONField.The advantages of this field are Postgre DB support, it makes it easy to deal with ever-changing requirements (we can easily change the schema). Also, it comes in useful when storing multi-level object graphs.
+
+2. You can find GENERIC_MODEL_SCHEMA in base settings. In my solution of schema, each attribute has a type and properties field, properties include different attributes like required, max_length, etc. The GenericModel includes JSONField named "data". I created the GenericModelForm form class, in which I overridden the method __init__, with the help of which I dynamically determine the fields for the form based on the schema. The same form will be used in the admin panel. Fields validation is realized on the form level. Also, I added schema validation (is schema exist, correct type, correct properties for the attributes).
+
+3. Also, when I started the project I faced some issues with installing packages. The packages were outdated and produced conflicts. Therefore, I updated the versions of some packages and made small changes (replaced deprecated methods).
 

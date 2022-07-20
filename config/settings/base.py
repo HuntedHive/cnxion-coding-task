@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'hhcodingtask.users.apps.UsersConfig',
     # Your stuff: custom apps go here
+    'hhcodingtask.model_data.apps.ModelDataConfig'
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -238,3 +239,29 @@ SOCIALACCOUNT_ADAPTER = 'hhcodingtask.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+GENERIC_MODEL_SCHEMA = {
+    "username": {
+        "field_type": str,
+        "properties": {
+            "max_length": 55
+        }
+    },
+    "age": {
+        "field_type": int,
+        "properties": {
+            "max_value": 99
+        }
+    },
+    "rating": {
+        "field_type": float,
+        "properties": {
+            "max_value": 10.0
+        }
+    },
+    "is_active": {
+        "field_type": bool,
+        "properties": {
+            "required": False,
+        }
+    },
+}
