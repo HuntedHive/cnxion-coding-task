@@ -18,7 +18,7 @@ Solution
 --------
 Please create a separate branch where you can commit your work. Follow general guidelines of keeping git history clean and use meaningful messages. Please submit your solution as an open pull request to this repository.
 
-Please describe your solution in the seperate paragraph at the bottom of this README file. Description should contain information like: solution overview, basic details, reasons for choosing one approach vs others. `A picture is worth a thousand words` - so any screenshots explaining the solution or showing it works are appreciated.
+Please describe your solution in the separate paragraph at the bottom of this README file. Description should contain information like: solution overview, basic details, reasons for choosing one approach vs others. `A picture is worth a thousand words` - so any screenshots explaining the solution or showing it works are appreciated.
 
 Requirements
 ------------
