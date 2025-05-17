@@ -1,7 +1,10 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+try:
+    from django.utils.translation import gettext_lazy as _
+except ImportError:  # Django<4.0 fallback
+    from django.utils.translation import ugettext_lazy as _
 
 
 class User(AbstractUser):
